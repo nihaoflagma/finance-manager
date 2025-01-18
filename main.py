@@ -3,18 +3,18 @@ import os
 import json
 sys.stdout.reconfigure(encoding='utf-8')
 
-from models import User  # Импортируем User из models.py
+from models import User  
 
 class FinanceManager:
     def __init__(self):
-        self.users = {}  # Словарь для хранения пользователей
-        self.current_user = None  # Текущий авторизованный пользователь
+        self.users = {} 
+        self.current_user = None  
 
     def register(self, username, password):
         """Регистрация нового пользователя."""
         if username in self.users:
             raise ValueError("Пользователь уже существует.")
-        self.users[username] = User(username, password)  # Создание нового пользователя
+        self.users[username] = User(username, password) 
         print(f"Пользователь {username} успешно зарегистрирован.")
 
     def login(self, username, password):
@@ -22,13 +22,13 @@ class FinanceManager:
         if username not in self.users or self.users[username].password != password:
             raise ValueError("Неверное имя пользователя или пароль.")
         self.current_user = self.users[username]
-        self.current_user.wallet.load()  # Загружаем кошелек после входа
+        self.current_user.wallet.load()  
         print(f"Пользователь {username} успешно вошёл в систему.")
 
     def logout(self):
         """Выход из системы."""
         if self.current_user:
-            self.current_user.wallet.save()  # Сохраняем кошелек перед выходом
+            self.current_user.wallet.save()  
             self.current_user = None
             print("Вы успешно вышли из системы.")
 
@@ -52,7 +52,7 @@ class FinanceManager:
             wallet.export_summary(command[1])
             print(f"Сводка успешно сохранена в файл {command[1]}.")
         elif command[0] == "transfer":
-            # Команда transfer: transfer <username> <amount>
+            
             if len(command) != 3:
                 raise ValueError("Команда 'transfer' требует два аргумента: логин получателя и сумма перевода.")
             
@@ -62,19 +62,19 @@ class FinanceManager:
             if recipient_username not in self.users:
                 raise ValueError(f"Пользователь {recipient_username} не найден.")
             
-            # Фиксируем расход у отправителя и доход у получателя
+            
             recipient_wallet = self.users[recipient_username].wallet
             
-            # Проверка на достаточность средств
+            
             if amount <= 0:
                 raise ValueError("Сумма перевода должна быть больше нуля.")
             
             if amount > wallet.balance:
                 raise ValueError("Недостаточно средств на балансе для перевода.")
             
-            # Выполняем перевод
-            wallet.add_expense("Перевод на кошелек " + recipient_username, amount)  # Уменьшаем баланс отправителя
-            recipient_wallet.add_income("Перевод от " + self.current_user.username, amount)  # Увеличиваем баланс получателя
+            
+            wallet.add_expense("Перевод на кошелек " + recipient_username, amount)  
+            recipient_wallet.add_income("Перевод от " + self.current_user.username, amount)  
             print(f"Перевод {amount} от {self.current_user.username} на {recipient_username} успешно выполнен.")
 
         else:
