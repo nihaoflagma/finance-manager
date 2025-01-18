@@ -5,9 +5,9 @@ class Wallet:
     def __init__(self, username):
         """Конструктор для инициализации кошелька."""
         self.username = username
-        self.balance = 0.0  # Баланс
-        self.transactions = []  # Список транзакций
-        self.budgets = {}  # Бюджеты по категориям
+        self.balance = 0.0  
+        self.transactions = []  
+        self.budgets = {}  
 
     def add_income(self, category, amount):
         """Добавить доход."""
