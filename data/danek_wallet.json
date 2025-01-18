@@ -1,0 +1,11 @@
+{
+    "balance": 1000.0,
+    "transactions": [
+        {
+            "type": "income",
+            "category": "работа",
+            "amount": 1000.0
+        }
+    ],
+    "budgets": {}
+}

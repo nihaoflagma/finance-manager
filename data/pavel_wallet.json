@@ -1,0 +1,28 @@
+{
+    "balance": 0.0,
+    "transactions": [
+        {
+            "type": "income",
+            "category": "работа",
+            "amount": 1000.0
+        },
+        {
+            "type": "income",
+            "category": "уда",
+            "amount": 500.0
+        },
+        {
+            "type": "expense",
+            "category": "уда",
+            "amount": 600.0
+        },
+        {
+            "type": "expense",
+            "category": "работа",
+            "amount": 900.0
+        }
+    ],
+    "budgets": {
+        "транспорт": 500.0
+    }
+}
